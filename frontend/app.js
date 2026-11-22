@@ -190,15 +190,56 @@ async function updateComplaint(id) {
   } catch (err) { toast(err.message); }
 }
 $("refresh-admin").addEventListener("click", loadAdminData);
+
 function drawChart(id, type, labels, values, label) {
   const canvas = $(id);
   const existing = Chart.getChart(canvas);
   if (existing) existing.destroy();
+
+  const isMonthlyTrend = id === "month-chart";
+
   new Chart(canvas, {
-    type, data:{labels, datasets:[{label, data:values, borderWidth:2, borderRadius: type==="bar" ? 6 : 0, tension:.3}]},
-    options:{responsive:true, maintainAspectRatio:false, plugins:{legend:{display:type==="doughnut"}}}
+    type,
+    data: {
+      labels,
+      datasets: [{
+        label,
+        data: values,
+        borderWidth: 2,
+        borderRadius: type === "bar" ? 6 : 0,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          display: type === "doughnut"
+        }
+      },
+      scales: isMonthlyTrend ? {
+        x: {
+          title: {
+            display: true,
+            text: "Month"
+          }
+        },
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "Number of Complaints"
+          },
+          ticks: {
+            precision: 0
+          }
+        }
+      } : {}
+    }
   });
 }
+
 async function loadAnalytics() {
   try {
     const data = await api("/api/analytics");
