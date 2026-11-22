@@ -55,7 +55,8 @@ app.secret_key = os.getenv(
 
 app.config.update(
     SESSION_COOKIE_HTTPONLY=True,
-    SESSION_COOKIE_SAMESITE="Lax",
+SESSION_COOKIE_SAMESITE="None",
+SESSION_COOKIE_SECURE=True,
     MAX_CONTENT_LENGTH=5 * 1024 * 1024
 )
 
