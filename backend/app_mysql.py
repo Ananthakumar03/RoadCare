@@ -882,17 +882,15 @@ def road_impact_heatmap():
 # RUN ROADCARE WITH MYSQL
 # ---------------------------------
 
+print("Starting RoadCare MySQL...")
+
+init_db()
+
 if __name__ == "__main__":
-
-    print("Starting RoadCare MySQL...")
-
-    init_db()
-
     app.run(
         host="0.0.0.0",
         port=5001,
         debug=True
     )
-
 
 
