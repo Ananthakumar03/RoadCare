@@ -2,7 +2,7 @@ const $ = (id) => document.getElementById(id);
 let me = null;
 let charts = [];
 
-const API_BASE_URL = "http://127.0.0.1:5001";
+const API_BASE_URL = "https://roadcare-production-afc8489c.up.railway.app";
 
 async function api(url, options = {}) {
   const response = await fetch(`${API_BASE_URL}${url}`, {
