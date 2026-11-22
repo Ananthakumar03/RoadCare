@@ -1,0 +1,857 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RoadCare | Public Road Maintenance Analytics</title>
+
+  <link rel="stylesheet" href="/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="topbar">
+
+    <a class="brand" href="/">
+      <span class="brand-mark">R</span>
+      <span>
+        RoadCare
+        <small>PUBLIC ROAD INTELLIGENCE</small>
+      </span>
+    </a>
+
+    <nav>
+  <button class="nav-link active" data-page="home">Home</button>
+  <button class="nav-link" data-page="citizen">Citizen Portal</button>
+  <button class="nav-link" data-page="admin">Admin Portal</button>
+  <button class="nav-link" data-page="analytics">Analytics</button>
+  <button class="nav-link" data-page="heatmap">Road Impact Heatmap</button>
+</nav>
+
+    <div id="user-area">
+      <span class="muted">Not logged in</span>
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <!-- ================================= -->
+    <!-- HOME PAGE -->
+    <!-- ================================= -->
+
+    <section id="home-page" class="page active">
+
+      <div class="hero">
+
+        <div class="hero-copy">
+
+          <span class="eyebrow">
+            SMARTER ROADS · STRONGER COMMUNITIES
+          </span>
+
+          <h1>
+            Better roads begin<br>
+            <em>with better insights.</em>
+          </h1>
+
+          <p>
+            Report road damage, follow repair progress and turn
+            community reports into useful maintenance insights.
+          </p>
+
+          <div class="hero-actions">
+            <button class="btn primary" data-go="citizen">
+              Report a road issue
+            </button>
+
+            <button class="btn secondary" data-go="admin">
+              Admin portal
+            </button>
+          </div>
+
+          <div class="hero-note">
+            A citizen reporting
+            and data-driven maintenance planning.
+          </div>
+
+        </div>
+
+        <div class="hero-art">
+          <div class="road-visual">
+            <div class="road-line"></div>
+            <div class="pin pin-one">●</div>
+            <div class="pin pin-two">●</div>
+            <div class="pin pin-three">●</div>
+          </div>
+
+          <div class="floating-card">
+            <span class="pulse"></span>
+            <div>
+              <b>Community reports</b>
+              <small>Help identify roads needing attention</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- ROAD PROBLEMS GALLERY -->
+
+      <section class="road-problems-section">
+
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">IDENTIFY ROAD ISSUES</span>
+            <h2>What problem did you notice?</h2>
+            <p>Select a road problem to submit your complaint.</p>
+          </div>
+        </div>
+
+        <div class="road-problems-grid">
+
+          <button type="button" class="road-problem-card" data-damage-type="Pothole">
+            <img src="/images/pothole.jpg" alt="Pothole">
+            <h3>Potholes</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Cracked road">
+            <img src="/images/cracked-road.jpg" alt="Cracked road">
+            <h3>Road Cracks</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Waterlogging">
+            <img src="/images/waterlogging.jpg" alt="Waterlogging">
+            <h3>Waterlogging</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Road surface damage">
+            <img src="/images/surface-damage.jpg" alt="Road surface damage">
+            <h3>Road Surface Damage</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Open manhole">
+            <img src="/images/open-manhole.jpg" alt="Open manhole">
+            <h3>Open Manhole</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Uneven road">
+            <img src="/images/uneven-road.jpg" alt="Uneven road">
+            <h3>Uneven Road</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Road shoulder damage">
+            <img src="/images/shoulder-damage.jpg" alt="Road shoulder damage">
+            <h3>Road Shoulder Damage</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Drainage damage">
+            <img src="/images/drainage.jpg" alt="Drainage damage">
+            <h3>Drainage Damage</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Damaged speed breaker">
+            <img src="/images/speed-breaker.jpg" alt="Damaged speed breaker">
+            <h3>Damaged Speed Breaker</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Faded road markings">
+            <img src="/images/road-markings.jpg" alt="Faded road markings">
+            <h3>Faded Road Markings</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Damaged divider">
+            <img src="/images/damaged-divider.jpg" alt="Damaged divider">
+            <h3>Damaged Divider</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Fallen tree">
+            <img src="/images/fallen-tree.jpg" alt="Fallen tree">
+            <h3>Fallen Tree</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Road debris">
+            <img src="/images/road-debris.jpg" alt="Road debris">
+            <h3>Road Debris</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Footpath damage">
+            <img src="/images/footpath.jpg" alt="Footpath damage">
+            <h3>Footpath Damage</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Water pipe leakage">
+            <img src="/images/pipe-leakage.jpg" alt="Water pipe leakage">
+            <h3>Water Pipe Leakage</h3>
+            <span>Report this issue →</span>
+          </button>
+
+          <button type="button" class="road-problem-card" data-damage-type="Road excavation damage">
+            <img src="/images/excavation.jpg" alt="Road excavation damage">
+            <h3>Road Excavation Damage</h3>
+            <span>Report this issue →</span>
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- FOUR MODULES -->
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">THE FOUR MODULES</span>
+          <h2>One connected road-care system</h2>
+        </div>
+      </div>
+
+      <div class="module-grid">
+
+        <article class="module-card">
+          <div class="module-icon">01</div>
+          <h3>Citizen Portal</h3>
+          <p>Submit road complaints, attach photos and track updates.</p>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">02</div>
+          <h3>Admin Portal</h3>
+          <p>Review reports, verify details and update repair status.</p>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">03</div>
+          <h3>Road Analytics</h3>
+          <p>Understand complaint patterns by area, severity and month.</p>
+        </article>
+
+        <article class="module-card">
+          <div class="module-icon">04</div>
+          <h3>Repair Priority</h3>
+          <p>Compare reports using a transparent priority score.</p>
+        </article>
+
+      </div>
+
+      <div class="notice">
+        <b>Project note</b>
+        <span>
+          RoadCare is an educational prototype, not an official
+          government portal. Priority scores support human review;
+          they do not make repair decisions.
+        </span>
+      </div>
+
+    </section>
+
+
+
+
+<section id="citizen-page" class="page">
+
+  <div class="page-heading">
+    <span class="eyebrow">CITIZEN SERVICES</span>
+    <h1>Citizen Portal</h1>
+    <p>Report a road issue and keep track of its progress.</p>
+  </div>
+
+  <div id="auth-panel" class="auth-narrow">
+
+    <!-- CITIZEN LOGIN -->
+    <div id="citizen-login-panel" class="panel">
+
+      <h2>Citizen Login</h2>
+      <p class="muted">Welcome back! Login to your RoadCare account.</p>
+
+      <form id="citizen-login-form" class="form">
+
+        <label>
+          Email address
+          <input
+    name="email"
+    type="email"
+    required
+    placeholder="name@example.com"
+    autocomplete="section-citizen username"
+>
+        </label>
+
+        <label>
+          Password
+          <div class="password-wrapper">
+            <input
+    name="password"
+    type="password"
+    required
+    placeholder="Your password"
+    class="password-input"
+    autocomplete="off"
+>
+            <button type="button" class="toggle-password" aria-label="Show password">
+              👁
+            </button>
+          </div>
+        </label>
+
+        <button type="submit" class="btn primary full">Login</button>
+
+      </form>
+
+      <div class="auth-switch">
+        <p>Don't have an account?</p>
+        <button type="button" id="show-register-btn" class="btn secondary full">
+          Create New Account
+        </button>
+      </div>
+
+    </div>
+
+    <!-- CITIZEN REGISTRATION -->
+    <div id="citizen-register-panel" class="panel hidden">
+
+      <h2>Create Citizen Account</h2>
+      <p class="muted">Register to report and track road problems.</p>
+
+      <form id="register-form" class="form">
+
+        <label>
+          Full name
+          <input name="name" required placeholder="Your name">
+        </label>
+
+        <label>
+          Email address
+          <input name="email" type="email" required placeholder="name@example.com">
+        </label>
+
+        <label>
+          Password
+          <div class="password-wrapper">
+            <input
+              name="password"
+              type="password"
+              minlength="6"
+              required
+              placeholder="At least 6 characters"
+              class="password-input"
+              autocomplete="new-password"
+            >
+            <button type="button" class="toggle-password" aria-label="Show password">
+              👁
+            </button>
+          </div>
+        </label>
+
+        <button type="submit" class="btn primary full">
+          Create Account
+        </button>
+
+      </form>
+
+      <div class="auth-switch">
+        <p>Already have an account?</p>
+        <button type="button" id="show-login-btn" class="btn secondary full">
+          Back to Login
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- CITIZEN WORKSPACE -->
+  <div id="citizen-workspace" class="hidden">
+
+    <div class="two-column">
+
+      <div class="panel">
+
+        <h2>Submit Road Complaint</h2>
+        <p class="muted">Fields marked * are required.</p>
+
+        <form id="complaint-form" class="form">
+
+          <label>
+            Complaint title *
+            <input name="title" required placeholder="Example: Large pothole near bus stop">
+          </label>
+
+          <label>
+            Road name / landmark *
+            <input name="road_name" id="road-name" required placeholder="Automatically detected road or landmark">
+          </label>
+
+          <div class="form-row">
+            <label>
+              Area / locality *
+              <input name="area" id="area" required placeholder="Automatically detected area">
+            </label>
+
+            <label>
+              Damage type *
+              <select name="damage_type" id="damage-type" required>
+                <option value="">Select road problem</option>
+                <option value="Pothole">Potholes</option>
+                <option value="Cracked road">Road Cracks</option>
+                <option value="Waterlogging">Waterlogging</option>
+                <option value="Road surface damage">Road Surface Damage</option>
+                <option value="Open manhole">Open Manhole</option>
+                <option value="Uneven road">Uneven Road</option>
+                <option value="Road shoulder damage">Road Shoulder Damage</option>
+                <option value="Drainage damage">Drainage Damage</option>
+                <option value="Damaged speed breaker">Damaged Speed Breaker</option>
+                <option value="Faded road markings">Faded Road Markings</option>
+                <option value="Damaged divider">Damaged Divider</option>
+                <option value="Fallen tree">Fallen Tree</option>
+                <option value="Road debris">Road Debris</option>
+                <option value="Footpath damage">Footpath Damage</option>
+                <option value="Water pipe leakage">Water Pipe Leakage</option>
+                <option value="Road excavation damage">Road Excavation Damage</option>
+                <option value="Other">Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Description *
+            <textarea name="description" rows="3" required placeholder="Describe the road problem"></textarea>
+          </label>
+
+          <div class="form-row">
+            <label>
+              Damage severity *
+              <select name="severity">
+                <option value="1">1 – Minor</option>
+                <option value="2">2 – Low</option>
+                <option value="3" selected>3 – Moderate</option>
+                <option value="4">4 – Serious</option>
+                <option value="5">5 – Very serious</option>
+              </select>
+            </label>
+
+            <label>
+              Traffic level *
+              <select name="traffic_level">
+                <option value="1">1 – Very low</option>
+                <option value="2">2 – Low</option>
+                <option value="3" selected>3 – Medium</option>
+                <option value="4">4 – High</option>
+                <option value="5">5 – Very high</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              Reported accident count
+              <input name="accident_count" type="number" min="0" value="0">
+            </label>
+
+            <label>
+              Road photo (optional)
+              <input name="photo" type="file" accept=".png,.jpg,.jpeg,.webp">
+            </label>
+          </div>
+
+          <div class="location-section">
+
+            <button type="button" id="get-location-btn" class="btn secondary">
+              📍 Use My Current Location
+            </button>
+
+            <p id="location-message" class="field-help">
+              Click the button to capture your current GPS location.
+            </p>
+
+            <div class="form-row">
+              <label>
+                Latitude
+                <input name="latitude" id="latitude" placeholder="GPS latitude" required readonly>
+              </label>
+
+              <label>
+                Longitude
+                <input name="longitude" id="longitude" placeholder="GPS longitude" required readonly>
+              </label>
+            </div>
+
+          </div>
+
+          <p class="field-help">
+            Only enter accident counts from a reliable source. Otherwise leave it as 0.
+            Do not include private or sensitive information in photos.
+          </p>
+
+          <button type="submit" class="btn primary full">
+            Submit Complaint
+          </button>
+
+        </form>
+
+        <div id="complaint-message" class="message"></div>
+
+      </div>
+
+      <div class="panel">
+
+        <div class="panel-title-row">
+          <div>
+            <h2>My Complaints</h2>
+            <p class="muted">Track your submitted reports.</p>
+          </div>
+
+          <button id="refresh-citizen" class="btn small secondary">
+            Refresh
+          </button>
+        </div>
+
+        <div id="my-complaints" class="complaint-list empty-state">
+          Your submitted complaints will appear here.
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+    <!-- ================================= -->
+    <!-- ADMIN PORTAL -->
+    <!-- ================================= -->
+
+    <section id="admin-page" class="page">
+
+      <div class="page-heading">
+        <span class="eyebrow">DEPARTMENT WORKSPACE</span>
+        <h1>Admin Portal</h1>
+        <p>Review citizen reports and maintain complaint records.</p>
+      </div>
+
+
+      <div id="admin-login-panel" class="panel auth-narrow">
+
+        <h2>Administrator login</h2>
+
+        <form id="admin-login-form" class="form">
+
+        
+<label>
+  Email
+  <input
+    name="email"
+    type="email"
+    required
+    placeholder="Enter your email"
+    autocomplete="off"
+  >
+</label>
+
+<label>
+  Password
+  <div class="password-wrapper">
+    <input
+      name="password"
+      type="password"
+      required
+      placeholder="Administrator password"
+      autocomplete="off"
+      class="password-input"
+    >
+    <button type="button" class="toggle-password" aria-label="Show password">
+      👁
+    </button>
+  </div>
+</label>
+
+
+          <button type="submit" class="btn primary full">
+            Login as administrator
+          </button>
+
+        </form>
+
+        <p class="field-help">
+          Local demo account details are provided in README.md.
+          Change the default password before any real deployment.
+        </p>
+
+      </div>
+
+
+      <div id="admin-workspace" class="hidden">
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <span>Total reports</span>
+            <b id="admin-total">0</b>
+          </div>
+
+          <div class="stat-card">
+            <span>Open / in progress</span>
+            <b id="admin-pending">0</b>
+          </div>
+
+          <div class="stat-card">
+            <span>Resolved</span>
+            <b id="admin-resolved">0</b>
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <div class="panel-title-row">
+
+            <div>
+              <h2>All road complaints</h2>
+              <p class="muted">
+                Review each report and update its repair status.
+              </p>
+            </div>
+
+            <button id="refresh-admin" class="btn small secondary">
+              Refresh
+            </button>
+
+          </div>
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Complaint / Road</th>
+                  <th>Area</th>
+                  <th>Severity</th>
+                  <th>Citizen</th>
+                  <th>Status</th>
+                  <th>Update</th>
+                </tr>
+              </thead>
+
+              <tbody id="admin-table">
+                <tr>
+                  <td colspan="7" class="empty-state">
+                    No complaints loaded.
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ================================= -->
+    <!-- ANALYTICS PAGE -->
+    <!-- ================================= -->
+
+    <section id="analytics-page" class="page">
+
+      <div class="page-heading">
+        <span class="eyebrow">DATA-DRIVEN MAINTENANCE</span>
+        <h1>Road Condition Analytics</h1>
+        <p>
+          Understand reported road issues and review maintenance
+          priority recommendations.
+        </p>
+      </div>
+
+
+      <div id="analytics-locked" class="panel auth-narrow">
+
+        <h2>Administrator access required</h2>
+
+        <p class="muted">
+          Log in through the Admin Portal to view complaint analytics.
+        </p>
+
+        <button class="btn primary" data-go="admin">
+          Go to Admin Portal
+        </button>
+
+      </div>
+
+
+      <div id="analytics-workspace" class="hidden">
+
+        <div class="stats-grid">
+
+          <div class="stat-card">
+            <span>Total complaints</span>
+            <b id="analytics-total">0</b>
+          </div>
+
+          <div class="stat-card">
+            <span>Open / in progress</span>
+            <b id="analytics-pending">0</b>
+          </div>
+
+          <div class="stat-card">
+            <span>Resolved complaints</span>
+            <b id="analytics-resolved">0</b>
+          </div>
+
+        </div>
+
+
+        <div class="chart-grid">
+
+          <div class="panel chart-panel">
+            <h3>Complaints by area</h3>
+            <canvas id="area-chart"></canvas>
+          </div>
+
+          <div class="panel chart-panel">
+            <h3>Complaints by severity</h3>
+            <canvas id="severity-chart"></canvas>
+          </div>
+
+          <div class="panel chart-panel">
+            <h3>Monthly complaint trend</h3>
+            <canvas id="month-chart"></canvas>
+          </div>
+
+        </div>
+
+
+        <div class="panel">
+
+          <h2>Repair priority recommendations</h2>
+
+          <p class="muted">
+            Scores are based on the prototype formula described
+            in the project documentation.
+          </p>
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Complaint</th>
+                  <th>Area</th>
+                  <th>Score</th>
+                  <th>Priority</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+
+              <tbody id="priority-table">
+                <tr>
+                  <td colspan="5" class="empty-state">
+                    No data yet.
+                  </td>
+                </tr>
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+    <!-- ROAD IMPACT HEATMAP PAGE -->
+<section id="heatmap-page" class="page">
+
+    <div class="page-heading">
+        <span class="eyebrow">LOCATION-BASED ROAD INTELLIGENCE</span>
+        <h1>Road Impact Heatmap</h1>
+        <p>Identify road damage hotspots and high-impact areas.</p>
+    </div>
+
+    <div class="heatmap-summary">
+        <div class="heatmap-card">
+            <h3>Total Locations</h3>
+            <p id="heatmapLocations">0</p>
+        </div>
+
+        <div class="heatmap-card">
+            <h3>Mapped Complaints</h3>
+            <p id="heatmapComplaints">0</p>
+        </div>
+
+        <div class="heatmap-card">
+            <h3>High Impact Areas</h3>
+            <p id="heatmapHighImpact">0</p>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div id="roadHeatmap"></div>
+    </div>
+
+    <div id="heatmapDetails"></div>
+
+    <p class="field-help">
+        Demo coordinates are approximate area-level locations,
+        not verified road-level GPS positions.
+    </p>
+
+</section>
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+
+  <footer>
+    <span>RoadCare · Public Road Maintenance Priority Analytics</span>
+    <span>Educational prototype · Human review required</span>
+  </footer>
+
+
+  <div id="toast" class="toast"></div>
+
+
+  <!-- JAVASCRIPT -->
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/app.js"></script>

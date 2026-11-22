@@ -1,0 +1,27 @@
+
+# Python virtual environments
+venv/
+venv*/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Environment secrets
+.env
+.env.*
+
+# Uploaded user files
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Temporary files
+*.log
+.DS_Store
+# Local database files
+*.db
+*.sqlite3
+# Old SQLite backend files
+backend/app.py
+backend/app_sqlite_backup.py
